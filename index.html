@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Student Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">🎓 <span>Student Hub</span></div>
+
+        <nav>
+            <button class="nav-link active" data-page="dashboard">🏠 Dashboard</button>
+            <button class="nav-link" data-page="notes">📝 My Notes</button>
+            <button class="nav-link" data-page="assignments">📚 Assignments</button>
+            <button class="nav-link" data-page="timetable">📅 Timetable</button>
+            <button class="nav-link" data-page="tasks">✅ To-Do List</button>
+            <button class="nav-link" data-page="timer">⏱ Study Timer</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="themeBtn" class="theme-btn">🌙 Dark Mode</button>
+            <p>Smart Student Hub<br>Version 1.0</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h2 id="pageTitle">Dashboard</h2>
+                <p id="currentDate"></p>
+            </div>
+            <div class="profile">👨‍🎓 <span>Student</span></div>
+        </header>
+
+        <!-- Dashboard -->
+        <section class="page active" id="dashboard">
+            <div class="welcome">
+                <div>
+                    <h1>Welcome to Student Hub! 👋</h1>
+                    <p>Organize your studies. Achieve your goals.</p>
+                </div>
+                <div class="welcome-icon">🎓</div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <span>📚</span>
+                    <p>Total Notes</p>
+                    <h2 id="noteCount">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>📋</span>
+                    <p>Assignments</p>
+                    <h2 id="assignmentCount">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>✅</span>
+                    <p>Completed Tasks</p>
+                    <h2 id="completedCount">0</h2>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <h3>🚀 Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button onclick="showPage('notes')">📝 Add Notes</button>
+                        <button onclick="showPage('assignments')">📚 Add Assignment</button>
+                        <button onclick="showPage('tasks')">✅ Add Task</button>
+                        <button onclick="showPage('timer')">⏱ Start Studying</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>💡 Study Motivation</h3>
+                    <p class="motivation">
+                        "Success is the sum of small efforts repeated every day."
+                    </p>
+                    <p class="small">Stay focused and keep learning!</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>📌 Recent Notes</h3>
+                <div id="recentNotes" class="empty">No notes added yet.</div>
+            </div>
+        </section>
+
+        <!-- Notes -->
+        <section class="page" id="notes">
+            <div class="panel">
+                <h3>📝 My Study Notes</h3>
+                <input id="noteTitle" placeholder="Enter note title">
+                <textarea id="noteContent" placeholder="Write your study notes..."></textarea>
+                <button class="primary-btn" id="addNoteBtn">+ Add Note</button>
+                <div id="notesList" class="item-list"></div>
+            </div>
+        </section>
+
+        <!-- Assignments -->
+        <section class="page" id="assignments">
+            <div class="panel">
+                <h3>📚 Assignment Manager</h3>
+                <input id="assignmentTitle" placeholder="Assignment name">
+                <input id="assignmentSubject" placeholder="Subject name">
+                <label>Due Date</label>
+                <input type="date" id="assignmentDate">
+                <button class="primary-btn" id="addAssignmentBtn">+ Add Assignment</button>
+                <div id="assignmentsList" class="item-list"></div>
+            </div>
+        </section>
+
+        <!-- Timetable -->
+        <section class="page" id="timetable">
+            <div class="panel">
+                <h3>📅 Weekly Timetable</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>9:00 - 10:00</th>
+                                <th>10:00 - 11:00</th>
+                                <th>11:00 - 12:00</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Monday</td><td>Maths</td><td>English</td><td>Computer</td></tr>
+                            <tr><td>Tuesday</td><td>Python</td><td>Maths</td><td>Lab</td></tr>
+                            <tr><td>Wednesday</td><td>English</td><td>Computer</td><td>Python</td></tr>
+                            <tr><td>Thursday</td><td>Maths</td><td>Lab</td><td>English</td></tr>
+                            <tr><td>Friday</td><td>Computer</td><td>Python</td><td>Maths</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="small">Sample timetable. You can customize the subjects.</p>
+            </div>
+        </section>
+
+        <!-- Tasks -->
+        <section class="page" id="tasks">
+            <div class="panel">
+                <h3>✅ Daily To-Do List</h3>
+                <div class="input-row">
+                    <input id="taskInput" placeholder="Enter your task">
+                    <button class="primary-btn" id="addTaskBtn">Add</button>
+                </div>
+                <div id="taskList" class="item-list"></div>
+            </div>
+        </section>
+
+        <!-- Timer -->
+        <section class="page" id="timer">
+            <div class="panel timer-panel">
+                <h3>⏱ Study Timer</h3>
+                <p class="small">Focus on your learning!</p>
+                <div id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                    <button class="primary-btn" id="startTimer">Start</button>
+                    <button class="secondary-btn" id="pauseTimer">Pause</button>
+                    <button class="secondary-btn" id="resetTimer">Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>© 2026 Smart Student Hub | College Project</footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
